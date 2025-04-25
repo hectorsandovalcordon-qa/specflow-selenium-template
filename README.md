@@ -1,6 +1,6 @@
-# specflow-playwright-template
+# specflow-selenium-template
 
-Plantilla de proyecto .NET con ramas main y dev, integración continua con GitHub Actions y configuración de pruebas automatizadas utilizando SpecFlow.
+Plantilla de proyecto .NET con ramas main y dev, integración continua con GitHub Actions y configuración de pruebas automatizadas utilizando SpecFlow y Selenium Webdriver.
 
 Este repositorio está configurado para facilitar la integración continua (CI) en tus proyectos .NET. Además, incluye un proyecto de SpecFlow para realizar pruebas automatizadas con BDD (Behavior Driven Development), de modo que puedes ejecutarlas como parte del flujo de trabajo de CI.
 
