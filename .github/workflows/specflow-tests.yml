@@ -1,0 +1,34 @@
+name: SpecFlow Tests
+
+on:
+  pull_request:
+    branches:
+      - dev
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Paso 1: Checkout del código fuente
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      # Paso 2: Configurar .NET
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: '6.0'
+
+      # Paso 3: Restaurar dependencias
+      - name: Restore dependencies
+        run: dotnet restore ./SpecFlowSelenium/SpecflowSelenium.csproj --configfile ./NuGet.Config
+
+      # Paso 4: Compilar el proyecto
+      - name: Build project
+        run: dotnet build ./SpecFlowSelenium/SpecflowSelenium.csproj --configuration Release
+        
+      # Paso 5: Ejecutar tests de SpecFlow
+      - name: Run SpecFlow Tests
+        run: dotnet test ./SpecFlowSelenium/SpecflowSelenium.csproj --configuration Release --no-build --logger "trx"
