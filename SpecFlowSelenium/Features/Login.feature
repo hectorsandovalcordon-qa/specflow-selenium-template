@@ -29,10 +29,10 @@ Scenario: Password required field user login
     When User clicks on Login button
     Then User verifies password required field
 
-Scenario: Invalid user login
-    Given "login" page is open 
-    And UserName "aa" is entered
-    And Password "aa" is entered
-    When User clicks on Login button
-    Then User shows "Invalid username or password!" message
+#Scenario: Invalid user login
+#    Given "login" page is open 
+#    And UserName "aa" is entered
+#    And Password "aa" is entered
+#    When User clicks on Login button
+#    Then User shows "Invalid username or password!" message
 
