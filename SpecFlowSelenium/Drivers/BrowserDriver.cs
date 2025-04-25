@@ -7,7 +7,14 @@ namespace SpecFlowProject.Drivers
     {
         public IWebDriver CreateDriver()
         {
-            return new ChromeDriver();
+            // Configuración de opciones de Chrome
+            var options = new ChromeOptions();
+            options.AddArguments("--headless"); // Si quieres que se ejecute en modo headless (sin interfaz gráfica)
+
+            // Crear el ChromeDriver con las opciones configuradas
+            var driver = new ChromeDriver(options);
+
+            return driver;
         }
     }
 }

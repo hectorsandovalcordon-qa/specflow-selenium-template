@@ -23,12 +23,12 @@ jobs:
 
       # Paso 3: Restaurar dependencias
       - name: Restore dependencies
-        run: dotnet restore ./SpecFlowSelenium/SpecFlowSelenium.csproj --configfile ./NuGet.Config
+        run: dotnet restore ./SpecFlowSelenium/SpecflowSelenium.csproj --configfile ./NuGet.Config
 
       # Paso 4: Compilar el proyecto
       - name: Build project
-        run: dotnet build ./SpecFlowSelenium/SpecFlowSelenium.csproj --configuration Release
+        run: dotnet build ./SpecFlowSelenium/SpecflowSelenium.csproj --configuration Release
         
       # Paso 5: Ejecutar tests de SpecFlow
       - name: Run SpecFlow Tests
-        run: dotnet test ./SpecFlowSelenium/SpecFlowSelenium.csproj --configuration Release --no-build --logger "trx"
+        run: dotnet test ./SpecFlowSelenium/SpecflowSelenium.csproj --configuration Release --no-build --logger "trx"
