@@ -20,10 +20,4 @@
     <PackageReference Include="FluentAssertions" Version="8.2.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Page Include="NuGet.Config">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Page>
-  </ItemGroup>
-
 </Project>
