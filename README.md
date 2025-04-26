@@ -57,7 +57,7 @@ Para eliminar automáticamente las ramas después de que un Pull Request sea apr
 Crea el archivo `.github/workflows/specflow-tests.yml` con el siguiente contenido:
 
 ```bash
-name: specflow-tests
+name: SpecFlow Tests
 
 on:
   pull_request:
@@ -66,45 +66,31 @@ on:
       - main
 
 jobs:
-  build-and-test:
+  test:
     runs-on: ubuntu-latest
 
     steps:
-      # Paso 1: Checkout del código
-      - uses: actions/checkout@v3
+      # Paso 1: Checkout del código fuente
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      # Paso 2: Setup .NET 6.0
-      - uses: actions/setup-dotnet@v3
+      # Paso 2: Configurar .NET
+      - name: Set up .NET
+        uses: actions/setup-dotnet@v2
         with:
-          dotnet-version: '6.0.x'
+          dotnet-version: '6.0'
 
       # Paso 3: Restaurar dependencias
-      - run: dotnet restore
+      - name: Restore dependencies
+        run: dotnet restore ./SpecFlowSelenium/SpecflowSelenium.csproj --configfile ./NuGet.Config
 
-      # Paso 4: Compilar en modo Release
-      - run: dotnet build --no-restore --configuration Release
-
-      # Paso 5: Instalar los navegadores de Playwright
-      - name: Install Playwright Browsers
-        shell: pwsh
-        run: |
-          $pwScript = Get-ChildItem -Path ./bin -Recurse -Filter "playwright.ps1" | Select-Object -First 1
-          if (-not $pwScript) {
-            Write-Error "❌ No se encontró el archivo playwright.ps1"
-            exit 1
-          }
-          & $pwScript.FullName install
-
-      # Paso 6: Ejecutar tests (headless=true debe estar configurado en el código)
-      - run: dotnet test --no-build --configuration Release --logger "trx"
-
-      # Paso 7: Subir resultados
-      - name: Upload test results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: test-results
-          path: '**/TestResults/*.trx'
+      # Paso 4: Compilar el proyecto
+      - name: Build project
+        run: dotnet build ./SpecFlowSelenium/SpecflowSelenium.csproj --configuration Release
+        
+      # Paso 5: Ejecutar tests de SpecFlow
+      - name: Run SpecFlow Tests
+        run: dotnet test ./SpecFlowSelenium/SpecflowSelenium.csproj --configuration Release --no-build --logger "trx"
 ```
           
 ## 🧪 Proyecto de SpecFlow
